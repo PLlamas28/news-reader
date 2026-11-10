@@ -1,0 +1,9 @@
+@use "sass:map";
+@use "variables" as *;
+
+// Usage: @include up(md) { ... }  -> applies at 900px and wider
+@mixin up($name) {
+  @media (min-width: map.get($breakpoints, $name)) {
+    @content;
+  }
+}

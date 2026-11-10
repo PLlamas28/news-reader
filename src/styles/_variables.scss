@@ -1,0 +1,6 @@
+// Mobile-first breakpoints (min-width). Used via the `up` mixin.
+$breakpoints: (
+  sm: 37.5rem,  // 600px
+  md: 56.25rem, // 900px
+  lg: 75rem,    // 1200px
+);

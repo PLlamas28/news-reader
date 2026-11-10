@@ -1,0 +1,27 @@
+@use "../../styles/mixins" as *;
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem 2rem;
+
+  @include up(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include up(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// The lead story spans every column and is separated from the rest by a rule.
+.lead {
+  @include up(md) {
+    grid-column: 1 / -1;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+}

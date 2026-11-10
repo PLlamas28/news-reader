@@ -1,0 +1,113 @@
+@use "../../styles/mixins" as *;
+
+.card {
+  position: relative; // anchors the stretched link below
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.media {
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--rule); // shows while the image loads
+  border-radius: 4px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+// The headline link covers the whole card, so the entire card is clickable
+// while keyboard users still tab to a single link per story.
+.link {
+  text-decoration: none;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+  }
+
+  &:focus-visible {
+    outline: none;
+
+    &::after {
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+  }
+}
+
+.summary {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 0.975rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.meta {
+  margin: 0;
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.8125rem;
+  color: var(--ink-muted);
+}
+
+.source {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+// ---- Lead story: bigger headline, image beside text on wide screens ----
+.lead {
+  .title {
+    font-size: clamp(1.75rem, 1.25rem + 2.2vw, 2.75rem);
+    line-height: 1.1;
+  }
+
+  .summary {
+    display: block;
+    font-size: 1.0625rem;
+  }
+
+  @include up(md) {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 2rem;
+    align-items: center;
+
+    // No image: let the text use the full width instead of leaving a blank column.
+    .body:only-child {
+      grid-column: 1 / -1;
+      max-width: 48rem;
+    }
+  }
+}

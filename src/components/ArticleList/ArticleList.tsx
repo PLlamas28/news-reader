@@ -1,6 +1,7 @@
 import type { Article } from "@/types/article";
 import { ArticleCard } from "@/components/ArticleCard/ArticleCard";
 import styles from "./ArticleList.module.scss";
+console.log("INCOMING",styles);
 
 interface ArticleListProps {
   articles: Article[];
